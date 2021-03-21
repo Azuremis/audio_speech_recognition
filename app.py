@@ -7,6 +7,7 @@ app = Flask(__name__)
 # route for homepage
 @app.route("/", methods=["GET", "POST"])
 def index():
+    transcript = ""
     if request.method == "POST":
         print("Form data received")
 
@@ -23,6 +24,7 @@ def index():
 
         # assumption file exists
         if file:
+            print("valid file uploaded")
             recogniser = sr.Recognizer()
 
             # open audio in manageable format
@@ -33,10 +35,10 @@ def index():
                 data = recogniser.record(source)
 
             # parse the text from audio
-            text = recogniser.recognize_google(data, key=None)
-            print(text)
+            transcript = recogniser.recognize_google(data, key=None)
+            print(transcript)
 
-    return render_template("index.html")
+    return render_template("index.html", transcript=transcript)
 
 if __name__ == "__main__":
     # debug=True for automatic refresh of app on save

@@ -3,6 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Speech audio recognition</title>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@300&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{url_for('static', filename='styles/index.css')}}"/>
+
 </head>
 <body>
 <div id="speechContainer">
@@ -10,8 +16,16 @@
     <form method="post" enctype="multipart/form-data"> <!-- form with multiple parts -->
         <input type="file" name="File"> <!-- file button -->
         <br>
-        <input type="submit" value="Transcribe"> <!-- trascribe button -->
+        <input type="submit" id="submitButton" value="Transcribe"> <!-- trascribe button -->
     </form>
+
+    {% if transcript != "" %}
+    <div id="speechTranscriptContainer">
+        <h1>Transcript</h1>
+        <p id="speechText">{{transcript}}</p>
+    </div>
+    {% endif %}
+
 </div>
 </body>
 </html>
